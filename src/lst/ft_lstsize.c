@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa.c                                               :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduvey <mduvey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 18:33:30 by mduvey            #+#    #+#             */
-/*   Updated: 2024/11/07 18:42:42 by mduvey           ###   ########.fr       */
+/*   Created: 2024/10/22 09:20:36 by mduvey            #+#    #+#             */
+/*   Updated: 2024/10/23 18:16:54 by mduvey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	do_sa(t_list *a)
+int	ft_lstsize(t_list *lst)
 {
-	t_list	*temp;
+	int		size;
+	t_list	*ptr;
 
-	if (!a || !a->next)
+	if (!lst)
 		return (0);
-	temp = a;
-	a->next = a;
-	a = temp;
-	return (1);
+	ptr = lst;
+	size = 1;
+	while (ptr->next != NULL)
+	{
+		ptr = ptr->next;
+		size++;
+	}
+	return (size);
 }

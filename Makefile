@@ -1,35 +1,37 @@
-CC = gcc
-FLAGS = -Werror -Wall -Wextra
+NAME             = push_swap
+CC                 = gcc
+FLAGS            = -Wall -Wextra -Werror
+RM                 = rm -rf
 
-NAME = push_swap.a
+SRC_PATH         = src/
+SRCS = main.c sa.c \
+	lst/ft_lstadd_front.c lst/ft_lstadd_back.c lst/ft_lstclear.c \
+	lst/ft_lstdelone.c lst/ft_lstiter.c lst/ft_lstlast.c \
+	lst/ft_lstmap.c lst/ft_lstnew.c lst/ft_lstsize.c
 
-SOURCES = \
-	src/sa.c \
-	
+HEADER_PATH     = includes/
+HEADERS            = push_swap.h
 
-OBJ_DIR = objects
-OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)/%.o)
+INCLUDES    = $(patsubst %.h, $(HEADER_PATH)%.h, $(HEADERS))
+
+OBJS_DIR        =  .objects/
+OBJS            =  $(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS))
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	ar rcs $(NAME) $(OBJECTS)
+$(NAME): $(OBJS) Makefile
+	$(CC) $(FLAGS) -I $(HEADER_PATH) $(OBJS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
-	@mkdir -p $(OBJ_DIR)/$(dir $<)
-	$(CC) $(FLAGS) -c $< -I . -o $@
+$(OBJS_DIR)%.o : $(SRC_PATH)%.c $(INCLUDES)
+	mkdir -p $(dir $@)
+	$(CC) $(FLAGS) -I $(HEADER_PATH) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
+	$(RM) $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
-
-test: $(NAME)
-	cc test.c -o test.out
-	ar rcs $(NAME) test.out
-	./$(NAME)
 
 .PHONY: all clean fclean re test

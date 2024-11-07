@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa.c                                               :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduvey <mduvey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 18:33:30 by mduvey            #+#    #+#             */
-/*   Updated: 2024/11/07 18:42:42 by mduvey           ###   ########.fr       */
+/*   Created: 2024/10/22 09:38:39 by mduvey            #+#    #+#             */
+/*   Updated: 2024/10/22 09:40:37 by mduvey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	do_sa(t_list *a)
+t_list	*ft_lstlast(t_list *lst)
 {
-	t_list	*temp;
+	t_list	*ptr;
 
-	if (!a || !a->next)
-		return (0);
-	temp = a;
-	a->next = a;
-	a = temp;
-	return (1);
+	if (!lst)
+		return (NULL);
+	ptr = lst;
+	while (ptr->next != NULL)
+		ptr = ptr->next;
+	return (ptr);
 }

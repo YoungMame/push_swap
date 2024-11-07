@@ -1,25 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sa.c                                               :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduvey <mduvey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 18:33:30 by mduvey            #+#    #+#             */
-/*   Updated: 2024/11/07 18:42:42 by mduvey           ###   ########.fr       */
+/*   Created: 2024/10/22 09:36:21 by mduvey            #+#    #+#             */
+/*   Updated: 2024/10/23 15:29:38 by mduvey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	do_sa(t_list *a)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*temp;
+	t_list	*ptr;
 
-	if (!a || !a->next)
-		return (0);
-	temp = a;
-	a->next = a;
-	a = temp;
-	return (1);
+	if (!new || !lst)
+		return ;
+	if (*lst == NULL)
+		*lst = new;
+	else
+	{
+		ptr = ft_lstlast(*lst);
+		ptr->next = new;
+	}
+	return ;
 }
