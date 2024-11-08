@@ -12,14 +12,15 @@
 
 #include "push_swap.h"
 
-int	do_sa(t_list *a)
+int	do_sa(t_list **a)
 {
 	t_list	*temp;
 
-	if (!a || !a->next)
+	if (!a || !(*a) || !(*a)->next)
 		return (0);
-	temp = a;
-	a->next = a;
-	a = temp;
+	temp = *a;
+	*a = (*a)->next;
+	temp->next = (*a)->next;
+	(*a)->next = temp;
 	return (1);
 }

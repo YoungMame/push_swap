@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static void	show_a(t_list *a)
+static void	show_list(t_list *a)
 {
 	int		a_index = 0;
 
@@ -33,7 +33,7 @@ int	main()
 
 	srand(time(NULL));
 	i = 0;
-	while (i < 13)
+	while (i < 4)
 	{
 		content = malloc(sizeof(int));
 		*content = rand() % 100;
@@ -42,6 +42,10 @@ int	main()
 		ft_lstadd_front(&a, new_node);
 		i++;
 	}
-	show_a(a);
+	show_list(a);
+	do_sa(&a);
+	printf("Stack after do_sa \n");
+	printf("----------------------------\n");
+	show_list(a);
 	return (1);
 }
