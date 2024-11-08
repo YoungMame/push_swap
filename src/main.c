@@ -42,11 +42,15 @@ int	main(int argc, char **argv)
 	t_list	*a = NULL;
 	t_list	*b = NULL;
 	t_list	*new_node;
+	int		*content;
 
 	i = 1;
+	content = NULL;
 	while (i < argc)
 	{
-		new_node = ft_lstnew(argv[i]);
+		content = malloc(sizeof(int));
+		*content = ft_atoi(argv[i]);
+		new_node = ft_lstnew((void *)content);
 		ft_lstadd_front(&a, new_node);
 		i++;
 	}
