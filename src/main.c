@@ -36,31 +36,18 @@ static void	show_list(t_list *a, t_list *b)
 	return ;
 }
 
-int	main()
+int	main(int argc, char **argv)
 {
 	int		i;
-	int		*content;
 	t_list	*a = NULL;
 	t_list	*b = NULL;
 	t_list	*new_node;
 
-	srand(time(NULL));
-	i = 0;
-	while (i < 4)
+	i = 1;
+	while (i < argc)
 	{
-		content = malloc(sizeof(int));
-		*content = rand() % 100;
-		new_node = ft_lstnew(content);
+		new_node = ft_lstnew(argv[i]);
 		ft_lstadd_front(&a, new_node);
-		i++;
-	}
-	i = 0;
-	while (i < 4)
-	{
-		content = malloc(sizeof(int));
-		*content = rand() % 100;
-		new_node = ft_lstnew(content); 
-		ft_lstadd_front(&b, new_node);
 		i++;
 	}
 	show_list(a, b);
