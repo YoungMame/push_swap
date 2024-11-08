@@ -4,7 +4,7 @@ FLAGS            = -Wall -Wextra -Werror
 RM                 = rm -rf
 
 SRC_PATH         = src/
-SRCS = main.c sa.c \
+SRCS = main.c rules/swap.c rules/push.c rules/rotate.c rules/reverse_rotate.c \
 	lst/ft_lstadd_front.c lst/ft_lstadd_back.c lst/ft_lstclear.c \
 	lst/ft_lstdelone.c lst/ft_lstiter.c lst/ft_lstlast.c \
 	lst/ft_lstmap.c lst/ft_lstnew.c lst/ft_lstsize.c

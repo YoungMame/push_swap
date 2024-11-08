@@ -37,6 +37,17 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
-int		do_sa(t_list **a);
+int		do_sa(t_list **a, t_list **b);
+int		do_sa(t_list **a, t_list **b);
+int		do_ss(t_list **a, t_list **b);
+int		do_pa(t_list **a, t_list **b);
+int		do_pb(t_list **a, t_list **b);
+int		do_ra(t_list **a);
+int		do_rb(t_list **b);
+int		do_rr(t_list **a, t_list **b);
+int		do_rra(t_list **a);
+int		do_rrb(t_list **b);
+int		do_rrr(t_list **a, t_list **b);
+
 
 #endif
