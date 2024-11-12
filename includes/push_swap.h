@@ -33,5 +33,9 @@ int		do_rr(t_list **a, t_list **b);
 int		do_rra(t_list **a);
 int		do_rrb(t_list **b);
 int		do_rrr(t_list **a, t_list **b);
+int	get_content_value(t_list *list);
+void	free_stack_content(void *content);
+t_list	*get_biggest(t_list *list);
+t_list	*get_smaller(t_list *list, int target);
 
 #endif

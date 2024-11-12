@@ -5,6 +5,7 @@ RM                 = rm -rf
 
 SRC_PATH         = src/
 SRCS = main.c rules/swap.c rules/rotate.c rules/reverse_rotate.c rules/push.c \
+		content.c get.c
 
 HEADER_PATH     = includes/
 HEADERS            = push_swap.h
