@@ -20,20 +20,118 @@ static void	show_list(t_list *a, t_list *b)
 	while (a || b)
 	{
 		if (a)
-			printf("%i, ", *(int *)a->content);
+		{
+			printf("%i, ", *((int *)a->content));
+			a = a->next;
+		}
 		else
 			printf(" null");
 		if (b)
-			printf("%i, ", *(int *)b->content);
+		{
+			printf("%i, ", *((int *)b->content));
+			b = b->next;
+		}
 		else
 			printf(" null");
 		printf("\n");
-		a = a->next;
-		b = b->next;
 		index++;
 	}
 	printf("a  |  b\n");
 	return ;
+}
+
+int	get_content_value(t_list *list)
+{
+	return (*((int *)list->content));
+}
+
+int	is_minimum(int n, t_list *b)
+{
+	while (b && b->content)
+	{
+		if (get_content_value(b) < n)
+			return (0);
+		b = b->next;
+	}
+	return (1);
+}
+
+t_list	*get_biggest(t_list *list)
+{
+	t_list	*biggest_ptr;
+	int		biggest;
+	int		number;
+
+	biggest_ptr = list;
+	while (list)
+	{
+		number = get_content_value(list);
+		biggest = get_content_value(biggest_ptr);
+		if (number > biggest)
+			biggest_ptr = list;
+		list = list->next;
+	}
+	return(biggest_ptr);
+}
+
+t_list	*get_smaller(t_list *list, int target)
+{
+	t_list	*smaller_ptr;
+	int		current;
+
+	smaller_ptr = list;
+	while (list)
+	{
+		current = get_content_value(list);
+		if (current <= target)
+		{
+			if (get_content_value(smaller_ptr) > target)
+				smaller_ptr = list;
+			else if (current > get_content_value(smaller_ptr))
+				smaller_ptr = list;
+		}
+		list = list->next;
+	}
+	return(smaller_ptr);
+}
+
+int	sort_in_b(t_list **a, t_list **b)
+{
+	t_list	*biggest_o_smallest_ptr;
+	if (is_minimum(get_content_value(*a), *b))
+	{
+		biggest_o_smallest_ptr = get_biggest(*b);
+		while (*b != biggest_o_smallest_ptr)
+			do_rb(b);
+		do_pb(a, b);
+		do_rrb(b);
+	}
+	else
+	{
+		biggest_o_smallest_ptr = get_smaller(*b, get_content_value(*a));
+		while (*b != biggest_o_smallest_ptr)
+			do_rb(b);
+		do_pb(a, b);
+	}
+	return (1);
+}
+
+int	sort_stack(t_list **a, t_list **b)
+{
+	t_list	*biggest_ptr;
+
+	if (!*b)
+		do_pb(a, b);
+	while (a && *a)
+		sort_in_b(a, b);
+	while (a && *a)
+		sort_in_b(a, b);
+	biggest_ptr = get_biggest(*b);
+	while (*b != biggest_ptr)
+		do_rb(b);
+	while (a && *a)
+		do_pa(a, b);
+	return (1);
 }
 
 int	main(int argc, char **argv)
@@ -55,8 +153,8 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	show_list(a, b);
-	do_rrr(&a, &b);
-	printf("Stacks after do_ss \n");
+	sort_stack(&a, &b);
+	printf("Stacks after sorting \n");
 	printf("----------------------------\n");
 	show_list(a, b);
 	return (1);

@@ -47,8 +47,10 @@ int	do_rrr(t_list **a, t_list **b)
 	int	result_sa;
 	int	result_sb;
 
-	result_sa = do_rra(a);
-	result_sb = do_rrb(b);
+	if (a && *a)
+		result_sa = do_rra(a);
+	if (b && *b)
+		result_sb = do_rrb(b);
 	if (result_sa && result_sb)
 		return (1);
 	return (0);

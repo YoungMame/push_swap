@@ -17,6 +17,7 @@ int	do_pa(t_list **a, t_list **b)
 	t_list	*temp;
 
 	temp = *b;
+	*b = (*b)->next;
 	temp->next = (*a);
 	(*a) = temp;
 	return (1);
@@ -27,6 +28,7 @@ int	do_pb(t_list **a, t_list **b)
 	t_list	*temp;
 
 	temp = *a;
+	*a = (*a)->next;
 	temp->next = (*b);
 	(*b) = temp;
 	return (1);
