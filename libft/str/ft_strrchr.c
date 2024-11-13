@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cost.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mduvey <mduvey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 17:23:12 by mduvey            #+#    #+#             */
-/*   Updated: 2024/11/13 18:25:42 by mduvey           ###   ########.fr       */
+/*   Created: 2024/10/23 18:14:41 by mduvey            #+#    #+#             */
+/*   Updated: 2024/10/23 18:14:41 by mduvey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-static int	ft_lstindex(t_list *ptr, t_list *list)
+char	*ft_strrchr(const char *s, int c)
 {
 	int	index;
 
-	index = 0;
-	while (list && list != ptr)
+	index = ft_strlen(s) + 1;
+	while (index--)
 	{
-		index++;
-		list = list->next;
+		if (s[index] == (char)c)
+			return ((char *)s + index);
 	}
-	return (index);
-}
-
-int	get_r_cost(t_list *target, t_list **list)
-{
-	int		target_index;
-	int		list_size;
-
-	list_size = ft_lstsize(*list);
-	target_index = ft_lstindex(target, *list);
-	if (target_index <= (list_size - target_index))
-		return (1);
-	return (0);
+	return (NULL);
 }

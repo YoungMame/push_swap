@@ -33,7 +33,7 @@ $(OBJS_DIR)%.o : $(SRC_PATH)%.c $(INCLUDES)
 
 clean:
 	$(RM) $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
 	$(RM) $(NAME)

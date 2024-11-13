@@ -38,6 +38,6 @@ int			get_content_value(t_list *list);
 void		free_stack_content(void *content);
 t_list		*get_biggest(t_list *list);
 t_list		*get_smaller(t_list *list, int target);
-int			get_r_cost(t_list *target, t_list *source, t_list **list);
+int         get_r_cost(t_list *target, t_list **list);
 
 #endif

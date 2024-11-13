@@ -12,33 +12,33 @@
 
 #include "push_swap.h"
 
-static void	show_list(t_list *a, t_list *b)
-{
-	int		index;
+// static void	show_list(t_list *a, t_list *b)
+// {
+// 	int		index;
 
-	index = 0;
-	while (a || b)
-	{
-		if (a)
-		{
-			printf("%i, ", *((int *)a->content));
-			a = a->next;
-		}
-		else
-			printf(" null");
-		if (b)
-		{
-			printf("%i, ", *((int *)b->content));
-			b = b->next;
-		}
-		else
-			printf(" null");
-		printf("\n");
-		index++;
-	}
-	printf("a  |  b\n");
-	return ;
-}
+// 	index = 0;
+// 	while (a || b)
+// 	{
+// 		if (a)
+// 		{
+// 			printf("%i, ", *((int *)a->content));
+// 			a = a->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		if (b)
+// 		{
+// 			printf("%i, ", *((int *)b->content));
+// 			b = b->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		printf("\n");
+// 		index++;
+// 	}
+// 	printf("a  |  b\n");
+// 	return ;
+// }
 
 int	is_minimum(int n, t_list *b)
 {
@@ -58,7 +58,7 @@ int	sort_in_b(t_list **a, t_list **b)
 	if (is_minimum(get_content_value(*a), *b))
 	{
 		biggest_o_smallest_ptr = get_biggest(*b);
-		if (get_r_cost(biggest_o_smallest_ptr, *b, b))
+		if (get_r_cost(biggest_o_smallest_ptr, b))
 			while (*b != biggest_o_smallest_ptr)
 				do_rb(b);
 		else
@@ -69,7 +69,7 @@ int	sort_in_b(t_list **a, t_list **b)
 	else
 	{
 		biggest_o_smallest_ptr = get_smaller(*b, get_content_value(*a));
-		if (get_r_cost(biggest_o_smallest_ptr, *b, b))
+		if (get_r_cost(biggest_o_smallest_ptr, b))
 			while (*b != biggest_o_smallest_ptr)
 				do_rb(b);
 		else
@@ -115,9 +115,9 @@ int	main(int argc, char **argv)
 		ft_lstadd_back(&a, new_node);
 		i++;
 	}
-	show_list(a, b);
+	// show_list(a, b);
 	sort_stack(&a, &b);
-	show_list(a, b);
+	// show_list(a, b);
 	ft_lstclear(&a, &free_stack_content);
 	return (1);
 }
