@@ -12,42 +12,39 @@
 
 #include "push_swap.h"
 
-int	do_sa(t_list **a, t_list **b)
+static void	swap(t_list **list)
 {
 	t_list	*temp;
 
+	if (!list || !(*list) || !(*list)->next)
+		return ;
+	temp = *list;
+	*list = (*list)->next;
+	temp->next = (*list)->next;
+	(*list)->next = temp;
+	return ;
+}
+
+void	do_sa(t_list **a, t_list **b)
+{
 	(void)b;
-	if (!a || !(*a) || !(*a)->next)
-		return (0);
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*a)->next;
-	(*a)->next = temp;
-	return (1);
+	swap(a);
+	ft_printf("sa\n");
+	return ;
 }
 
-int	do_sb(t_list **a, t_list **b)
+void	do_sb(t_list **a, t_list **b)
 {
-	t_list	*temp;
-
 	(void)a;
-	if (!b || !(*b) || !(*b)->next)
-		return (0);
-	temp = *b;
-	*b = (*b)->next;
-	temp->next = (*b)->next;
-	(*b)->next = temp;
-	return (1);
+	swap(b);
+	ft_printf("sb\n");
+	return ;
 }
 
-int	do_ss(t_list **a, t_list **b)
+void	do_ss(t_list **a, t_list **b)
 {
-	int	result_sa;
-	int	result_sb;
-
-	result_sa = do_sa(a, b);
-	result_sb = do_sb(a, b);
-	if (result_sa && result_sb)
-		return (1);
-	return (0);
+	swap(a);
+	swap(b);
+	ft_printf("ss\n");
+	return ;
 }

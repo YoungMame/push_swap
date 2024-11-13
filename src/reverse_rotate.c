@@ -12,44 +12,41 @@
 
 #include "push_swap.h"
 
-int	do_ra(t_list **a)
+static void	reverse_rotate(t_list	**list)
 {
-	t_list	*temp;
 	t_list	*last;
+	t_list	*temp;
 
-	last = *a;
-	while (last->next)
+	last = *list;
+	while (last->next->next)
 		last = last->next;
-	temp = *a;
-	last->next = *a;
-	*a = (*a)->next;
-	temp->next = NULL;
-	return (1);
+	temp = last->next;
+	temp->next = *list;
+	*list = temp;
+	last->next = NULL;
+	return ;
 }
 
-int	do_rb(t_list **b)
+void	do_rra(t_list **a)
 {
-	t_list	*temp;
-	t_list	*last;
-
-	last = *b;
-	while (last->next)
-		last = last->next;
-	temp = *b;
-	last->next = *b;
-	*b = (*b)->next;
-	temp->next = NULL;
-	return (1);
+	reverse_rotate(a);
+	ft_printf("rra\n");
+	return ;
 }
 
-int	do_rr(t_list **a, t_list **b)
+void	do_rrb(t_list **b)
 {
-	int	result_sa;
-	int	result_sb;
+	reverse_rotate(b);
+	ft_printf("rrb\n");
+	return ;
+}
 
-	result_sa = do_ra(a);
-	result_sb = do_rb(b);
-	if (result_sa && result_sb)
-		return (1);
-	return (0);
+void	do_rrr(t_list **a, t_list **b)
+{
+	if (a && *a)
+		reverse_rotate(a);
+	if (b && *b)
+		reverse_rotate(b);
+	ft_printf("rrr\n");
+	return ;
 }

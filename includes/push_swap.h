@@ -10,6 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
+
 # include <aio.h>
 # include <unistd.h>
 # include <stdio.h>
@@ -17,25 +20,24 @@
 # include <stdlib.h>
 # include <stdarg.h>
 # include <time.h>
-#include "../libft/libft.h"
+# include "../libft/libft.h"
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
 
-int		do_sa(t_list **a, t_list **b);
-int		do_sa(t_list **a, t_list **b);
-int		do_ss(t_list **a, t_list **b);
-int		do_pa(t_list **a, t_list **b);
-int		do_pb(t_list **a, t_list **b);
-int		do_ra(t_list **a);
-int		do_rb(t_list **b);
-int		do_rr(t_list **a, t_list **b);
-int		do_rra(t_list **a);
-int		do_rrb(t_list **b);
-int		do_rrr(t_list **a, t_list **b);
-int	get_content_value(t_list *list);
-void	free_stack_content(void *content);
-t_list	*get_biggest(t_list *list);
-t_list	*get_smaller(t_list *list, int target);
+void		do_sa(t_list **a, t_list **b);
+void		do_sa(t_list **a, t_list **b);
+void		do_ss(t_list **a, t_list **b);
+void		do_pa(t_list **a, t_list **b);
+void		do_pb(t_list **a, t_list **b);
+void		do_ra(t_list **a);
+void		do_rb(t_list **b);
+void		do_rr(t_list **a, t_list **b);
+void		do_rra(t_list **a);
+void		do_rrb(t_list **b);
+void		do_rrr(t_list **a, t_list **b);
+int			get_content_value(t_list *list);
+void		free_stack_content(void *content);
+t_list		*get_biggest(t_list *list);
+t_list		*get_smaller(t_list *list, int target);
+int			get_r_cost(t_list *target, t_list *source, t_list **list);
 
 #endif

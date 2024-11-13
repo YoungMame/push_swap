@@ -4,8 +4,8 @@ FLAGS            = -Wall -Wextra -Werror
 RM                 = rm -rf
 
 SRC_PATH         = src/
-SRCS = main.c rules/swap.c rules/rotate.c rules/reverse_rotate.c rules/push.c \
-		content.c get.c
+SRCS = main.c swap.c rotate.c reverse_rotate.c push.c \
+		content.c get.c cost.c
 
 HEADER_PATH     = includes/
 HEADERS            = push_swap.h

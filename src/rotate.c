@@ -12,24 +12,39 @@
 
 #include "push_swap.h"
 
-int	do_pa(t_list **a, t_list **b)
+static void	rotate(t_list **list)
 {
 	t_list	*temp;
+	t_list	*last;
 
-	temp = *b;
-	*b = (*b)->next;
-	temp->next = (*a);
-	(*a) = temp;
-	return (1);
+	last = *list;
+	while (last->next)
+		last = last->next;
+	temp = *list;
+	last->next = *list;
+	*list = (*list)->next;
+	temp->next = NULL;
+	return ;
 }
 
-int	do_pb(t_list **a, t_list **b)
+void	do_ra(t_list **a)
 {
-	t_list	*temp;
+	rotate(a);
+	ft_printf("ra\n");
+	return ;
+}
 
-	temp = *a;
-	*a = (*a)->next;
-	temp->next = (*b);
-	(*b) = temp;
-	return (1);
+void	do_rb(t_list **b)
+{
+	rotate(b);
+	ft_printf("rb\n");
+	return ;
+}
+
+void	do_rr(t_list **a, t_list **b)
+{
+	rotate(a);
+	rotate(b);
+	ft_printf("rr\n");
+	return ;
 }
