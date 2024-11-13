@@ -53,6 +53,7 @@ int	get_r_cost(t_list *target, t_list *source, t_list **list)
 	source_index = ft_abs(ft_lstindex(source, *list));
 	ft_printf("target_index = %i (valeur = %i)\n", target_index, get_content_value(target));
 	ft_printf("source_index = %i (valeur = %i)\n", source_index, get_content_value(source));
+	ft_printf("source = %i\n", source);
 	if ((target_index - source_index) < count)
 		return (0);
 	else
