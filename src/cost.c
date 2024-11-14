@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-static int	ft_lstindex(t_list *ptr, t_list *list)
+static int	ft_lstindex(t_list *list, t_list *ptr)
 {
 	int	index;
 
@@ -25,14 +25,12 @@ static int	ft_lstindex(t_list *ptr, t_list *list)
 	return (index);
 }
 
-int	get_r_cost(t_list *target, t_list **list)
+int	get_reverse_rotation_cost(t_list *target, t_list *list)
 {
-	int		target_index;
-	int		list_size;
+	return (ft_lstindex(list, target));
+}
 
-	list_size = ft_lstsize(*list);
-	target_index = ft_lstindex(target, *list);
-	if (target_index <= (list_size - target_index))
-		return (1);
-	return (0);
+int	get_rotation_cost(t_list *target, t_list *list)
+{
+	return (ft_lstsize(list) - ft_lstindex(list, target));
 }

@@ -12,6 +12,22 @@
 
 #include "push_swap.h"
 
+//with this function we are looking for the best rotation
+//target is the value we want to be the first element of our stack
+// 1 is rotate and 2 is reverse rotate
+
+int	get_rotation_way(t_list *target, t_list *list)
+{
+	int		target_index;
+	int		list_size;
+
+	list_size = ft_lstsize(list);
+	target_index = ft_lstindex(target, list);
+	if (target_index <= (list_size - target_index))
+		return (1);
+	return (2);
+}
+
 t_list	*get_biggest(t_list *list)
 {
 	t_list	*biggest_ptr;

@@ -7,6 +7,16 @@
 		"memory": "c",
 		"utility": "c",
 		"algorithm": "c",
-		"push_swap.h": "c"
+		"push_swap.h": "c",
+		"functional": "c",
+		"__functional_03": "c",
+		"target": "c",
+		"array": "c",
+		"*.tcc": "c",
+		"istream": "c",
+		"ranges": "c",
+		"tuple": "c",
+		"__functional_base": "c",
+		"locale": "c"
 	}
 }
