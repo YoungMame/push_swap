@@ -38,8 +38,10 @@ int			get_content_value(t_list *list);
 int			get_rotation_way(t_list *target, t_list *list);
 t_list		*get_biggest(t_list *list);
 t_list		*get_smaller(t_list *list, int target);
+int			is_minimum(int n, t_list *b);
 int			get_reverse_rotation_cost(t_list *target, t_list *list);
 int			get_rotation_cost(t_list *target, t_list *list);
+int			get_move_cost(t_list **a, t_list *source, t_list **b);
 void		free_stack_content(void *content);
 
 #endif

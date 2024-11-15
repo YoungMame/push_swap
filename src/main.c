@@ -40,7 +40,34 @@ static void	show_list(t_list *a, t_list *b)
 	return ;
 }
 
-//we travel the stack for each node to find the cheapest move
+//in this function we throw a in b, 
+//this function also calculates the best rotation way
+
+void	execute_move(t_list **a, t_list *source, t_list **b)
+{
+	t_list	*target;
+
+	if (get_rotation_way(source, *a) == 1)
+		while (*a != source)
+			do_ra(a);
+	else
+		while (*a != source)
+			do_rra(a);
+	if (!get_is_minimum(get_content_value(source), *b))
+	{
+		target = get_smaller(*b, get_content_value(source));
+		if (get_rotation_way(target, *b) == 1)
+			while (*b != source)
+				do_rb(b);
+		else
+			while (*b != source)
+				do_rrb(b);
+	}
+	return ;
+}
+
+//in this function we get every moves cost and ->
+//we execute the cheaper move
 
 void	sort_stacks(t_list **a, t_list **b)
 {
@@ -52,10 +79,11 @@ void	sort_stacks(t_list **a, t_list **b)
 
 	do_pb(a, b);
 	do_pb(a, b);
+	j = *a;
 	i = *a;
 	while (i)
 	{
-		latest_cost = get_move_cost(*a, *b, i);
+		latest_cost = get_move_cost(a, i, b);
 		if (latest_cost < cheapest_cost)
 		{
 			cheapest_cost = latest_cost;
