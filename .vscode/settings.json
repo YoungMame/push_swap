@@ -17,6 +17,7 @@
 		"ranges": "c",
 		"tuple": "c",
 		"__functional_base": "c",
-		"locale": "c"
+		"locale": "c",
+		"limits.h": "c"
 	}
 }

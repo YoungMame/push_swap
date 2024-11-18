@@ -12,57 +12,52 @@
 
 #include "push_swap.h"
 
-static void	show_list(t_list *a, t_list *b)
-{
-	int		index;
+// static void	show_list(t_list *a, t_list *b)
+// {
+// 	int		index;
 
-	index = 0;
-	while (a || b)
-	{
-		if (a)
-		{
-			printf("%i, ", *((int *)a->content));
-			a = a->next;
-		}
-		else
-			printf(" null");
-		if (b)
-		{
-			printf("%i, ", *((int *)b->content));
-			b = b->next;
-		}
-		else
-			printf(" null");
-		printf("\n");
-		index++;
-	}
-	printf("a  |  b\n");
-	return ;
-}
+// 	index = 0;
+// 	while (a || b)
+// 	{
+// 		if (a)
+// 		{
+// 			printf("%i, ", *((int *)a->content));
+// 			a = a->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		if (b)
+// 		{
+// 			printf("%i, ", *((int *)b->content));
+// 			b = b->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		printf("\n");
+// 		index++;
+// 	}
+// 	printf("a  |  b\n");
+// 	return ;
+// }
 
 //in this function we throw a in b, 
 //this function also calculates the best rotation way
 
-void	execute_move(t_list **a, t_list *source, t_list **b)
+static	void	execute_move(t_list **a, t_list *source, t_list **b, t_list *target)
 {
-	t_list	*target;
-
 	if (get_rotation_way(source, *a) == 1)
 		while (*a != source)
 			do_ra(a);
 	else
 		while (*a != source)
 			do_rra(a);
-	if (!get_is_minimum(get_content_value(source), *b))
-	{
-		target = get_smaller(*b, get_content_value(source));
-		if (get_rotation_way(target, *b) == 1)
-			while (*b != source)
-				do_rb(b);
-		else
-			while (*b != source)
-				do_rrb(b);
-	}
+	if (get_rotation_way(target, *b) == 1)
+		while (*b != target)
+			do_rb(b);
+	else
+		while (*b != target)
+			do_rrb(b);
+	do_pb(a, b);
 	return ;
 }
 
@@ -71,26 +66,46 @@ void	execute_move(t_list **a, t_list *source, t_list **b)
 
 void	sort_stacks(t_list **a, t_list **b)
 {
-	t_list	*i;
-	t_list	*j;
-	t_list	*choice;
+	t_list	*temp_source;
+	t_list	*temp_target;
+	t_list	*source;
+	t_list	*target;
 	int		latest_cost;
 	int		cheapest_cost;
 
 	do_pb(a, b);
 	do_pb(a, b);
-	j = *a;
-	i = *a;
-	while (i)
+	while (*a)
 	{
-		latest_cost = get_move_cost(a, i, b);
-		if (latest_cost < cheapest_cost)
+		source = NULL;
+		cheapest_cost = INT_MAX;
+		temp_source = *a;
+		temp_target = *b;
+		while (temp_source)
 		{
-			cheapest_cost = latest_cost;
-			choice = i;
+			if (get_is_minimum(get_content_value(temp_source), *b))
+				temp_target = get_biggest(*b);
+			else
+				temp_target = get_smaller(*b, get_content_value(temp_source));
+
+			ft_printf("Source: %d, Target: %d\n",
+					get_content_value(temp_source), 
+					get_content_value(temp_target));
+			latest_cost = get_move_cost(a, temp_source, b, temp_target);
+			if (latest_cost < cheapest_cost)
+			{
+				cheapest_cost = latest_cost;
+				source = temp_source;
+				target = temp_target;
+			}
+			temp_source = temp_source->next;
 		}
-		i = i->next;
+		execute_move(a, source, b, target);
 	}
+	while (*b != get_biggest(*b))
+		do_rb(b);
+	while (*b)
+		do_pa(a, b);
 }
 
 int	main(int argc, char **argv)

@@ -24,8 +24,8 @@ int	get_rotation_way(t_list *target, t_list *list)
 	list_size = ft_lstsize(list);
 	target_index = ft_lstindex(target, list);
 	if (target_index <= (list_size - target_index))
-		return (1);
-	return (2);
+		return (2);
+	return (1);
 }
 
 t_list	*get_biggest(t_list *list)
@@ -48,7 +48,7 @@ t_list	*get_biggest(t_list *list)
 
 int	get_is_minimum(int n, t_list *b)
 {
-	while (b && b->content)
+	while (b)
 	{
 		if (get_content_value(b) < n)
 			return (0);
