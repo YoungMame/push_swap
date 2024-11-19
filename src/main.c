@@ -199,7 +199,7 @@ int	main(int argc, char **argv)
 	{
 		content = malloc(sizeof(long));
 		*content = ft_atol(argv[i]);
-		if (a && is_existing(*content, a) || !content)
+		if ((a && is_existing(*content, a)) || !(INT_MIN < *content && *content < INT_MAX))
 			error = 1;
 		new_node = ft_lstnew((void *)content);
 		ft_lstadd_back(&a, new_node);
