@@ -81,32 +81,32 @@ static	void	fill_b(t_list **a, t_list **b, t_move move)
 	return ;
 }
 
-static	void	fill_a(t_list **a, t_list **b, t_move move)
-{
-	while (*a != move.target && *b != move.source)
-	{
-		if (get_rotation_way(move.target, *a) == 1 && get_rotation_way(move.source, *b) == 1)
-			do_rr(a, b);
-		else if (get_rotation_way(move.target, *a) == 0 && get_rotation_way(move.source, *b) == 0)
-			do_rrr(a, b);
-		else
-			break ;
-	}
-	if (get_rotation_way(move.target, *a) == 1)
-		while (*a != move.target)
-			do_ra(a);
-	else
-		while (*a != move.target)
-			do_rra(a);
-	if (get_rotation_way(move.source, *b) == 1)
-		while (*b != move.source)
-			do_rb(b);
-	else
-		while (*b != move.source)
-			do_rrb(b);
-	do_pa(a, b);
-	return ;
-}
+// static	void	fill_a(t_list **a, t_list **b, t_move move)
+// {
+// 	while (*a != move.target && *b != move.source)
+// 	{
+// 		if (get_rotation_way(move.target, *a) == 1 && get_rotation_way(move.source, *b) == 1)
+// 			do_rr(a, b);
+// 		else if (get_rotation_way(move.target, *a) == 0 && get_rotation_way(move.source, *b) == 0)
+// 			do_rrr(a, b);
+// 		else
+// 			break ;
+// 	}
+// 	if (get_rotation_way(move.target, *a) == 1)
+// 		while (*a != move.target)
+// 			do_ra(a);
+// 	else
+// 		while (*a != move.target)
+// 			do_rra(a);
+// 	if (get_rotation_way(move.source, *b) == 1)
+// 		while (*b != move.source)
+// 			do_rb(b);
+// 	else
+// 		while (*b != move.source)
+// 			do_rrb(b);
+// 	do_pa(a, b);
+// 	return ;
+// }
 
 static void	finalize_a(t_list **a)
 {
@@ -164,11 +164,21 @@ void	sort_stacks(t_list **a, t_list **b)
 	do_pb(a, b);
 	while (*a)
 		fill_b(a, b, find_best_move(a, b));
-	fill_a(a, b, find_best_move(b, a));
 	while (*b)
 		do_pa(a, b);
 	finalize_a(a);
 	return ;
+}
+
+static int	is_existing(int n, t_list *list)
+{
+	while (list)
+	{
+		if (get_content_value(list) == n)
+			return (1);
+		list = list->next;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -177,23 +187,28 @@ int	main(int argc, char **argv)
 	t_list	*a;
 	t_list	*b;
 	t_list	*new_node;
-	int		*content;
+	long	*content;
+	int		error;
 
 	i = 1;
 	a = NULL;
 	b = NULL;
 	content = NULL;
-	while (i < argc)
+	error = 0;
+	while (i < argc && argv[i])
 	{
-		content = malloc(sizeof(int));
-		*content = ft_atoi(argv[i]);
+		content = malloc(sizeof(long));
+		*content = ft_atol(argv[i]);
+		if (a && is_existing(*content, a) || !content)
+			error = 1;
 		new_node = ft_lstnew((void *)content);
 		ft_lstadd_back(&a, new_node);
 		i++;
 	}
-	// show_list(a, b);
-	sort_stacks(&a, &b);
-	// show_list(a, b);
+	if (ft_lstsize(a) && !error)
+		sort_stacks(&a, &b);
+	if (error)
+		ft_putstr_fd("Error\n", 2);
 	ft_lstclear(&a, &free_stack_content);
 	return (1);
 }
