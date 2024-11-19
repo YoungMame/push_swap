@@ -43,31 +43,116 @@
 //in this function we throw a in b, 
 //this function also calculates the best rotation way
 
-static	void	execute_move(t_list **a, t_list *source, t_list **b, t_list *target)
+// static	int	is_sorted(t_list *list)
+// {
+// 	while (list && list->next)
+// 	{
+// 		if (get_content_value(list->next) < get_content_value(list))
+// 			return (0);
+// 		list = list->next;
+// 	}
+// 	return (1);
+// }
+
+static	void	fill_b(t_list **a, t_list **b, t_move move)
 {
-	while (*a != source && *b != source)
+	while (*a != move.source && *b != move.source)
 	{
-		if (get_rotation_way(source, *a) == 1 && get_rotation_way(target, *b) == 1)
+		if (get_rotation_way(move.source, *a) == 1 && get_rotation_way(move.target, *b) == 1)
 			do_rr(a, b);
-		else if (get_rotation_way(source, *a) == 0 && get_rotation_way(target, *b) == 0)
+		else if (get_rotation_way(move.source, *a) == 0 && get_rotation_way(move.target, *b) == 0)
 			do_rrr(a, b);
 		else
-			break;
+			break ;
 	}
-	if (get_rotation_way(source, *a) == 1)
-		while (*a != source)
+	if (get_rotation_way(move.source, *a) == 1)
+		while (*a != move.source)
 			do_ra(a);
 	else
-		while (*a != source)
+		while (*a != move.source)
 			do_rra(a);
-	if (get_rotation_way(target, *b) == 1)
-		while (*b != target)
+	if (get_rotation_way(move.target, *b) == 1)
+		while (*b != move.target)
 			do_rb(b);
 	else
-		while (*b != target)
+		while (*b != move.target)
 			do_rrb(b);
 	do_pb(a, b);
 	return ;
+}
+
+static	void	fill_a(t_list **a, t_list **b, t_move move)
+{
+	while (*a != move.target && *b != move.source)
+	{
+		if (get_rotation_way(move.target, *a) == 1 && get_rotation_way(move.source, *b) == 1)
+			do_rr(a, b);
+		else if (get_rotation_way(move.target, *a) == 0 && get_rotation_way(move.source, *b) == 0)
+			do_rrr(a, b);
+		else
+			break ;
+	}
+	if (get_rotation_way(move.target, *a) == 1)
+		while (*a != move.target)
+			do_ra(a);
+	else
+		while (*a != move.target)
+			do_rra(a);
+	if (get_rotation_way(move.source, *b) == 1)
+		while (*b != move.source)
+			do_rb(b);
+	else
+		while (*b != move.source)
+			do_rrb(b);
+	do_pa(a, b);
+	return ;
+}
+
+static void	finalize_a(t_list **a)
+{
+	t_list	*target;
+
+	target = get_smallest(*a);
+	while (*a != target)
+	{
+		if (get_rotation_way(target, *a))
+			do_ra(a);
+		else if (get_rotation_way(target, *a) == 0)
+			do_rra(a);
+		else
+			break ;
+	}
+	return ;
+}
+
+static t_move	find_best_move(t_list **source_l, t_list **target_l)
+{
+	t_list	*temp_source;
+	t_list	*temp_target;
+	t_move	move;
+	int		latest_cost;
+
+	move.source = NULL;
+	move.target = NULL;
+	move.cost = INT_MAX;
+	temp_source = *source_l;
+	temp_target = *target_l;
+	while (temp_source)
+	{
+		if (get_is_minimum(get_content_value(temp_source), *target_l))
+			temp_target = get_biggest(*target_l);
+		else
+			temp_target = get_smaller(*target_l, get_content_value(temp_source));
+		latest_cost = get_move_cost(source_l, temp_source, target_l, temp_target);
+		if (latest_cost < move.cost)
+		{
+			move.cost = latest_cost;
+			move.source = temp_source;
+			move.target = temp_target;
+		}
+		temp_source = temp_source->next;
+	}
+	return (move);
 }
 
 //in this function we get every moves cost and ->
@@ -75,44 +160,15 @@ static	void	execute_move(t_list **a, t_list *source, t_list **b, t_list *target)
 
 void	sort_stacks(t_list **a, t_list **b)
 {
-	t_list	*temp_source;
-	t_list	*temp_target;
-	t_list	*source;
-	t_list	*target;
-	int		latest_cost;
-	int		cheapest_cost;
-
 	do_pb(a, b);
 	do_pb(a, b);
 	while (*a)
-	{
-		source = NULL;
-		cheapest_cost = INT_MAX;
-		temp_source = *a;
-		temp_target = *b;
-		while (temp_source)
-		{
-			if (get_is_minimum(get_content_value(temp_source), *b))
-				temp_target = get_biggest(*b);
-			else
-				temp_target = get_smaller(*b, get_content_value(temp_source));
-			latest_cost = get_move_cost(a, temp_source, b, temp_target);
-			if (latest_cost < cheapest_cost)
-			{
-				cheapest_cost = latest_cost;
-				source = temp_source;
-				target = temp_target;
-			}
-			temp_source = temp_source->next;
-		}
-		// show_list(*a, *b);
-		// ft_printf("L'action la moins couteuse(%i) est de deplacer %i devant %i\n", cheapest_cost, get_content_value(source), get_content_value(target));
-		execute_move(a, source, b, target);
-	}
-	while (*b != get_biggest(*b))
-		do_rb(b);
+		fill_b(a, b, find_best_move(a, b));
+	fill_a(a, b, find_best_move(b, a));
 	while (*b)
 		do_pa(a, b);
+	finalize_a(a);
+	return ;
 }
 
 int	main(int argc, char **argv)

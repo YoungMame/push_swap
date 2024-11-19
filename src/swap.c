@@ -25,17 +25,15 @@ static void	swap(t_list **list)
 	return ;
 }
 
-void	do_sa(t_list **a, t_list **b)
+void	do_sa(t_list **a)
 {
-	(void)b;
 	swap(a);
 	ft_printf("sa\n");
 	return ;
 }
 
-void	do_sb(t_list **a, t_list **b)
+void	do_sb(t_list **b)
 {
-	(void)a;
 	swap(b);
 	ft_printf("sb\n");
 	return ;

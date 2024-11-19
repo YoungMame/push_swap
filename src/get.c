@@ -48,6 +48,24 @@ t_list	*get_biggest(t_list *list)
 	return (biggest_ptr);
 }
 
+t_list	*get_smallest(t_list *list)
+{
+	t_list	*biggest_ptr;
+	int		biggest;
+	int		number;
+
+	biggest_ptr = list;
+	while (list)
+	{
+		number = get_content_value(list);
+		biggest = get_content_value(biggest_ptr);
+		if (number < biggest)
+			biggest_ptr = list;
+		list = list->next;
+	}
+	return (biggest_ptr);
+}
+
 int	get_is_minimum(int n, t_list *b)
 {
 	while (b)

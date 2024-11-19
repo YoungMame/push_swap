@@ -23,9 +23,15 @@
 # include <limits.h>
 # include "../libft/libft.h"
 
+typedef struct s_move
+{
+	t_list	*source;
+	t_list	*target;
+	int		cost;
+}	t_move;
 
-void		do_sa(t_list **a, t_list **b);
-void		do_sa(t_list **a, t_list **b);
+void		do_sa(t_list **a);
+void		do_sb(t_list **b);
 void		do_ss(t_list **a, t_list **b);
 void		do_pa(t_list **a, t_list **b);
 void		do_pb(t_list **a, t_list **b);
@@ -38,6 +44,7 @@ void		do_rrr(t_list **a, t_list **b);
 int			get_content_value(t_list *list);
 int			get_rotation_way(t_list *target, t_list *list);
 t_list		*get_biggest(t_list *list);
+t_list		*get_smallest(t_list *list);
 t_list		*get_smaller(t_list *list, int target);
 int			get_is_minimum(int n, t_list *b);
 int			get_reverse_rotation_cost(t_list *target, t_list *list);

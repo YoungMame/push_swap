@@ -18,6 +18,18 @@
 		"tuple": "c",
 		"__functional_base": "c",
 		"locale": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"optional": "c",
+		"ostream": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"__bit_reference": "c",
+		"__node_handle": "c",
+		"bitset": "c",
+		"deque": "c",
+		"__memory": "c",
+		"iterator": "c",
+		"limits": "c",
+		"vector": "c"
 	}
 }
