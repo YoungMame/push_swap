@@ -18,14 +18,16 @@
 
 int	get_rotation_way(t_list *target, t_list *list)
 {
-	int		target_index;
-	int		list_size;
+	int		cost;
+	int		cost_r;
 
-	list_size = ft_lstsize(list);
-	target_index = ft_lstindex(target, list);
-	if (target_index <= (list_size - target_index))
-		return (2);
-	return (1);
+	cost = get_rotation_cost(target, list);
+	cost_r = get_reverse_rotation_cost(target, list);
+	if (cost == -1 || cost_r == -1)
+		return (-1);
+	if (cost <= cost_r)
+		return (1);
+	return (0);
 }
 
 t_list	*get_biggest(t_list *list)

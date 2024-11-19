@@ -45,6 +45,15 @@
 
 static	void	execute_move(t_list **a, t_list *source, t_list **b, t_list *target)
 {
+	while (*a != source && *b != source)
+	{
+		if (get_rotation_way(source, *a) == 1 && get_rotation_way(target, *b) == 1)
+			do_rr(a, b);
+		else if (get_rotation_way(source, *a) == 0 && get_rotation_way(target, *b) == 0)
+			do_rrr(a, b);
+		else
+			break;
+	}
 	if (get_rotation_way(source, *a) == 1)
 		while (*a != source)
 			do_ra(a);
@@ -87,10 +96,6 @@ void	sort_stacks(t_list **a, t_list **b)
 				temp_target = get_biggest(*b);
 			else
 				temp_target = get_smaller(*b, get_content_value(temp_source));
-
-			ft_printf("Source: %d, Target: %d\n",
-					get_content_value(temp_source), 
-					get_content_value(temp_target));
 			latest_cost = get_move_cost(a, temp_source, b, temp_target);
 			if (latest_cost < cheapest_cost)
 			{
@@ -100,6 +105,8 @@ void	sort_stacks(t_list **a, t_list **b)
 			}
 			temp_source = temp_source->next;
 		}
+		// show_list(*a, *b);
+		// ft_printf("L'action la moins couteuse(%i) est de deplacer %i devant %i\n", cheapest_cost, get_content_value(source), get_content_value(target));
 		execute_move(a, source, b, target);
 	}
 	while (*b != get_biggest(*b))
