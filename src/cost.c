@@ -12,34 +12,6 @@
 
 #include "push_swap.h"
 
-// static void	show_list(t_list *a, t_list *b)
-// {
-// 	int		index;
-
-// 	index = 0;
-// 	while (a || b)
-// 	{
-// 		if (a)
-// 		{
-// 			printf("%i, ", *((int *)a->content));
-// 			a = a->next;
-// 		}
-// 		else
-// 			printf(" null");
-// 		if (b)
-// 		{
-// 			printf("%i, ", *((int *)b->content));
-// 			b = b->next;
-// 		}
-// 		else
-// 			printf(" null");
-// 		printf("\n");
-// 		index++;
-// 	}
-// 	printf("a  |  b\n");
-// 	return ;
-// }
-
 int	ft_lstindex(t_list *list, t_list *ptr)
 {
 	int	index;
@@ -55,22 +27,32 @@ int	ft_lstindex(t_list *list, t_list *ptr)
 	return (-1);
 }
 
-//the goal of this function is to calculate every moves that are possble
-// we use it to compare every move cost and execute the cheaper
-
-int	get_move_cost(t_list **a, t_list *source, t_list **b, t_list *target)
+int	get_move_cost(t_list *a, t_list *source, t_list *b, t_list *target)
 {
 	int		total_a;
 	int		total_b;
 
-	if (get_rotation_way(source, *a) == 1)
-		total_a = get_rotation_cost(source, *a);
+	if (get_rotation_way(source, a) == get_rotation_way(target, b))
+	{
+		total_a = get_rotation_cost(source, a);
+		total_b = get_rotation_cost(target, b);
+		if (get_rotation_way(source, a) == 0)
+		{
+			total_a = get_reverse_rotation_cost(source, a);
+			total_b = get_reverse_rotation_cost(target, b);
+		}
+		if (total_a > total_b)
+			return (total_a);
+		return (total_b);
+	}
+	if (get_rotation_way(source, a) == 1)
+		total_a = get_rotation_cost(source, a);
 	else
-		total_a = get_reverse_rotation_cost(source, *a);
-	if (get_rotation_way(target, *b) == 1)
-		total_b = get_rotation_cost(target, *b);
+		total_a = get_reverse_rotation_cost(source, a);
+	if (get_rotation_way(target, b) == 1)
+		total_b = get_rotation_cost(target, b);
 	else
-		total_b = get_reverse_rotation_cost(target, *b);
+		total_b = get_reverse_rotation_cost(target, b);
 	return (total_a + total_b + 1);
 }
 
