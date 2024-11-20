@@ -16,20 +16,6 @@
 //target is the value we want to be the first element of our stack
 // 1 is rotate and 2 is reverse rotate
 
-int	get_rotation_way(t_list *target, t_list *list)
-{
-	int		cost;
-	int		cost_r;
-
-	cost = get_rotation_cost(target, list);
-	cost_r = get_reverse_rotation_cost(target, list);
-	if (cost == -1 || cost_r == -1)
-		return (-1);
-	if (cost <= cost_r)
-		return (1);
-	return (0);
-}
-
 t_list	*get_biggest(t_list *list)
 {
 	t_list	*biggest_ptr;
@@ -96,4 +82,25 @@ t_list	*get_smaller(t_list *list, int target)
 		list = list->next;
 	}
 	return (smaller_ptr);
+}
+
+t_list	*get_bigger(t_list *list, int target)
+{
+	t_list	*bigger_ptr;
+	int		current;
+
+	bigger_ptr = list;
+	while (list)
+	{
+		current = get_content_value(list);
+		if (current >= target)
+		{
+			if (get_content_value(bigger_ptr) < target)
+				bigger_ptr = list;
+			else if (current < get_content_value(bigger_ptr))
+				bigger_ptr = list;
+		}
+		list = list->next;
+	}
+	return (bigger_ptr);
 }

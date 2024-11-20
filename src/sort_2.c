@@ -53,18 +53,18 @@ void	sort_stacks_5(t_list **a, t_list **b)
 		if (get_is_minimum(get_content_value(*b), *a))
 			temp_target = get_biggest(*a);
 		else
-			temp_target = get_smaller(*a, get_content_value(*b));
-		while (*a != temp_target)
-		{
-			if (get_rotation_way(temp_target, *a))
+			temp_target = get_bigger(*a, get_content_value(*b));
+		if (get_rotation_way(temp_target, *a))
+			while (*a != temp_target)
 				do_ra(a);
-			else
+		else
+			while (*a != temp_target)
 				do_rra(a);
-		}
 		do_pa(a, b);
 	}
-	temp_target = get_biggest(*a);
-	while (*a == temp_target)
+	temp_target = get_smallest(*a);
+	while (*a != temp_target)
 		do_ra(a);
 	return ;
 }
+

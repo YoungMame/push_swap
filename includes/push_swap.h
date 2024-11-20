@@ -44,6 +44,7 @@ void		do_rrr(t_list **a, t_list **b);
 int			get_content_value(t_list *list);
 int			get_rotation_way(t_list *target, t_list *list);
 t_list		*get_biggest(t_list *list);
+t_list		*get_bigger(t_list *list, int target);
 t_list		*get_smallest(t_list *list);
 t_list		*get_smaller(t_list *list, int target);
 int			get_is_minimum(int n, t_list *b);
@@ -55,5 +56,8 @@ int			ft_lstindex(t_list *list, t_list *ptr);
 void		free_stack_content(void *content);
 void		sort_stacks(t_list **a, t_list **b);
 void		sort_stacks_5(t_list **a, t_list **b);
+int			parse(char **args, t_list **a);
+int			is_sorted(t_list *list)
+
 
 #endif

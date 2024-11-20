@@ -27,6 +27,20 @@ int	ft_lstindex(t_list *list, t_list *ptr)
 	return (-1);
 }
 
+int	get_rotation_way(t_list *target, t_list *list)
+{
+	int		cost;
+	int		cost_r;
+
+	cost = get_rotation_cost(target, list);
+	cost_r = get_reverse_rotation_cost(target, list);
+	if (cost == -1 || cost_r == -1)
+		return (-1);
+	if (cost <= cost_r)
+		return (1);
+	return (0);
+}
+
 int	get_move_cost(t_list *a, t_list *source, t_list *b, t_list *target)
 {
 	int		total_a;
