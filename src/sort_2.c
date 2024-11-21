@@ -6,7 +6,7 @@
 /*   By: mduvey <mduvey@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 17:21:32 by mduvey            #+#    #+#             */
-/*   Updated: 2024/11/21 16:06:35 by mduvey           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:20:05 by mduvey           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	sort_stacks_5(t_list **a, t_list **b)
 		}
 		do_pa(a, b);
 	}
-	temp_target = get_biggest(*a);
-	while (*a == temp_target)
+	temp_target = get_smallest(*a);
+	while (*a != temp_target)
 		do_ra(a);
 	return ;
 }

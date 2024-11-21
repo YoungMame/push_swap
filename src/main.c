@@ -48,7 +48,7 @@ int	main(int argc, char **argv)
 
 	a = NULL;
 	b = NULL;
-	error = (parse(argv, &a) == 0);
+	error = (parse(argv, argc, &a) == 0);
 	(void)argc;
 	if (ft_lstsize(a) && !error && !is_sorted(a))
 	{
@@ -60,5 +60,7 @@ int	main(int argc, char **argv)
 	if (error)
 		return (1);
 	show_list(a, b);
+	ft_lstclear(&a, &free_stack_content);
+	ft_lstclear(&b, &free_stack_content);
 	return (0);
 }
