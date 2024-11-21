@@ -57,7 +57,7 @@ void		free_stack_content(void *content);
 void		sort_stacks(t_list **a, t_list **b);
 void		sort_stacks_5(t_list **a, t_list **b);
 int			parse(char **args, t_list **a);
-int			is_sorted(t_list *list)
+int			is_sorted(t_list *list);
 
 
 #endif
