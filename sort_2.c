@@ -27,17 +27,16 @@ static void	sort_stacks_3(t_list **a)
 	val1 = get_content_value(*a);
 	val2 = get_content_value((*a)->next);
 	val3 = get_content_value((*a)->next->next);
-
-	if (val1 > val2 && val2 < val3 && val3 > val1)   // 2 1 3
+	if (val1 > val2 && val2 < val3 && val3 > val1)
 		do_sa(a);
-	else if (val1 > val2 && val2 > val3)    // [3 2 1]
+	else if (val1 > val2 && val2 > val3)
 	{
 		do_sa(a);
 		do_ra(a);
 	}
-	else if (val1 < val2 && val2 > val3)     // 2 3 1
+	else if (val1 < val2 && val2 > val3)
 		do_ra(a);
-	else if (val1 > val2 && val2 < val3)    // 3 1 2
+	else if (val1 > val2 && val2 < val3)
 		do_ra(a);
 	return ;
 }
@@ -53,10 +52,12 @@ void	sort_stacks_5(t_list **a, t_list **b)
 	while (*b)
 	{
 		value = get_content_value(*b);
-		if (!get_is_maximum(value, *a))
-			temp_target = get_bigger(*a, value);
-		else 
+		ft_printf("Cas particulier = %i, ", value);
+		if (get_is_maximum(value, *a))
 			temp_target = get_smallest(*a);
+		else
+			temp_target = get_bigger(*a, value);
+		ft_printf("sa target est = %i\n", *temp_target);
 		while (*a != temp_target)
 		{
 			if (get_rotation_way(temp_target, *a))
@@ -69,5 +70,4 @@ void	sort_stacks_5(t_list **a, t_list **b)
 	temp_target = get_smallest(*a);
 	while (*a != temp_target)
 		do_ra(a);
-	return ;
 }

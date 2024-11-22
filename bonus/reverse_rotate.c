@@ -30,14 +30,12 @@ static void	reverse_rotate(t_list	**list)
 void	do_rra(t_list **a)
 {
 	reverse_rotate(a);
-	ft_printf("rra\n");
 	return ;
 }
 
 void	do_rrb(t_list **b)
 {
 	reverse_rotate(b);
-	ft_printf("rrb\n");
 	return ;
 }
 
@@ -47,6 +45,5 @@ void	do_rrr(t_list **a, t_list **b)
 		reverse_rotate(a);
 	if (b && *b)
 		reverse_rotate(b);
-	ft_printf("rrr\n");
 	return ;
 }

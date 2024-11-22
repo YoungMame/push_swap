@@ -46,5 +46,4 @@ void		free_stack_content(void *content);
 int			parse(char **args, int argc, t_list **a);
 int			is_sorted(t_list *list);
 
-
 #endif

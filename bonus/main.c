@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+int	is_sorted(t_list *list)
+{
+	while (list && list->next)
+	{
+		if (get_content_value(list->next) < get_content_value(list))
+			return (0);
+		list = list->next;
+	}
+	return (1);
+}
+
 int	handle_ope(char *ope, t_list **a_check, t_list **b_check)
 {
 	if (!ope)
@@ -39,6 +50,34 @@ int	handle_ope(char *ope, t_list **a_check, t_list **b_check)
 	return (1);
 }
 
+static void	show_list(t_list *a, t_list *b)
+{
+	int		index;
+
+	index = 0;
+	while (a || b)
+	{
+		if (a)
+		{
+			printf("%i, ", *((int *)a->content));
+			a = a->next;
+		}
+		else
+			printf(" null");
+		if (b)
+		{
+			printf("%i, ", *((int *)b->content));
+			b = b->next;
+		}
+		else
+			printf(" null");
+		printf("\n");
+		index++;
+	}
+	printf("a  |  b\n");
+	return ;
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*a_check;
@@ -51,28 +90,20 @@ int	main(int argc, char **argv)
 	b_check = NULL;
 	error = (parse(argv, argc, &a_check) == 0);
 	if (error)
-		ft_printf("Error\n");
+		return (1);
 	line = NULL;
 	is_running = 1;
 	while (is_running)
 	{
 		line = ft_get_next_line(0);
 		if (!line)
-			break;
+			break ;
 		is_running = handle_ope(line, &a_check, &b_check);
 		free(line);
 	}
+	show_list(a_check, b_check);
 	if (is_sorted(a_check) && ft_lstsize(b_check) == 0)
-	{
-		ft_printf("OK\n");
-		return (0);
-	}
+		return (ft_printf("OK\n"), 1);
 	else
-	{
-		ft_printf("KO\n");
-		return (1);
-	}
+		return (ft_printf("KO\n"), 1);
 }
-
-//ARG="10 7 8 2 3 6 1 4 9 5"; ./push_swap $ARG | ./CHECKER $ARG
-

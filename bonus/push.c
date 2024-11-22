@@ -26,13 +26,11 @@ static void	push(t_list **a, t_list **b)
 void	do_pa(t_list **a, t_list **b)
 {
 	push(a, b);
-	ft_printf("pa\n");
 	return ;
 }
 
 void	do_pb(t_list **a, t_list **b)
 {
 	push(b, a);
-	ft_printf("pb\n");
 	return ;
 }

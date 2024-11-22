@@ -12,6 +12,17 @@
 
 #include "push_swap.h"
 
+int	is_sorted(t_list *list)
+{
+	while (list && list->next)
+	{
+		if (get_content_value(list->next) < get_content_value(list))
+			return (0);
+		list = list->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_list	*a;

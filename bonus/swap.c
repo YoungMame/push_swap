@@ -28,14 +28,12 @@ static void	swap(t_list **list)
 void	do_sa(t_list **a)
 {
 	swap(a);
-	ft_printf("sa\n");
 	return ;
 }
 
 void	do_sb(t_list **b)
 {
 	swap(b);
-	ft_printf("sb\n");
 	return ;
 }
 
@@ -43,6 +41,5 @@ void	do_ss(t_list **a, t_list **b)
 {
 	swap(a);
 	swap(b);
-	ft_printf("ss\n");
 	return ;
 }

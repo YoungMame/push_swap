@@ -56,7 +56,7 @@ static t_move	find_best_move(t_list *src_list, t_list *tgt_list)
 		else
 			temp_target = get_smaller(tgt_list, get_content_value(temp_source));
 		latest_cost = get_move_cost(src_list,
-						temp_source, tgt_list, temp_target);
+				temp_source, tgt_list, temp_target);
 		if (latest_cost < move.cost)
 			move = update_move(latest_cost, temp_source, temp_target);
 		temp_source = temp_source->next;

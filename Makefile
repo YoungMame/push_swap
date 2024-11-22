@@ -4,7 +4,7 @@ CC               = gcc
 FLAGS            = -Wall -Wextra -Werror
 RM               = rm -rf
 
-SRC_PATH         = src/
+SRC_PATH         = ./
 SRCS             = main.c swap.c rotate.c reverse_rotate.c push.c \
                     content.c get.c get_2.c cost.c sort.c sort_2.c parse.c
 BONUS_PATH       = bonus/
@@ -16,7 +16,7 @@ HEADERS          = push_swap.h
 
 INCLUDES         = $(patsubst %.h, $(HEADER_PATH)%.h, $(HEADERS))
 
-OBJS_DIR         = .objects/src/
+OBJS_DIR         = .objects/
 OBJS             = $(patsubst %.c, $(OBJS_DIR)%.o, $(SRCS))
 
 BONUS_OBJS_DIR   = .objects/bonus/

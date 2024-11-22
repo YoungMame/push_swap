@@ -60,5 +60,4 @@ void		sort_stacks_5(t_list **a, t_list **b);
 int			parse(char **args, int argc, t_list **a);
 int			is_sorted(t_list *list);
 
-
 #endif
