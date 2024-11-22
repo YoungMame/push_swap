@@ -43,7 +43,7 @@ void		do_rrb(t_list **b);
 void		do_rrr(t_list **a, t_list **b);
 int			get_content_value(t_list *list);
 void		free_stack_content(void *content);
-int			parse(char **args, t_list **a);
+int			parse(char **args, int argc, t_list **a);
 int			is_sorted(t_list *list);
 
 

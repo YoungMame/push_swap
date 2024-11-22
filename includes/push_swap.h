@@ -48,6 +48,7 @@ t_list		*get_bigger(t_list *list, int target);
 t_list		*get_smallest(t_list *list);
 t_list		*get_smaller(t_list *list, int target);
 int			get_is_minimum(int n, t_list *b);
+int			get_is_maximum(int n, t_list *b);
 int			get_reverse_rotation_cost(t_list *target, t_list *list);
 int			get_rotation_cost(t_list *target, t_list *list);
 int			get_move_cost(t_list *a, t_list *source,

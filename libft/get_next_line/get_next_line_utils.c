@@ -65,7 +65,7 @@ char	*ft_gnl_str_free_join(char *s1, char *s2)
 	j = 0;
 	if (!s1 && !s2)
 		return (NULL);
-	str = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = malloc(ft_gnl_strlen(s1) + ft_gnl_strlen(s2) + 1);
 	if (!str)
 	{
 		free(s1);

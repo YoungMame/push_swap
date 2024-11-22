@@ -52,17 +52,6 @@ t_list	*get_smallest(t_list *list)
 	return (biggest_ptr);
 }
 
-int	get_is_minimum(int n, t_list *b)
-{
-	while (b)
-	{
-		if (get_content_value(b) < n)
-			return (0);
-		b = b->next;
-	}
-	return (1);
-}
-
 t_list	*get_smaller(t_list *list, int target)
 {
 	t_list	*smaller_ptr;

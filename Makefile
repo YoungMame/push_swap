@@ -6,7 +6,7 @@ RM               = rm -rf
 
 SRC_PATH         = src/
 SRCS             = main.c swap.c rotate.c reverse_rotate.c push.c \
-                    content.c get.c cost.c sort.c sort_2.c parse.c
+                    content.c get.c get_2.c cost.c sort.c sort_2.c parse.c
 BONUS_PATH       = bonus/
 BONUS_SRCS       = main.c parse.c content.c \
                     swap.c push.c rotate.c reverse_rotate.c
@@ -47,7 +47,7 @@ $(BONUS_OBJS_DIR)%.o : $(BONUS_PATH)%.c $(INCLUDES)
 clean:
 	$(RM) $(BONUS_OBJS_DIR)
 	$(RM) $(OBJS_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 
 fclean: clean
 	$(RM) $(NAME) $(BONUS)

@@ -45,18 +45,23 @@ static void	sort_stacks_3(t_list **a)
 void	sort_stacks_5(t_list **a, t_list **b)
 {
 	t_list	*temp_target;
+	int		value;
 
 	while (ft_lstsize(*a) > 3)
 		do_pb(a, b);
 	sort_stacks_3(a);
 	while (*b)
 	{
-		temp_target = get_bigger(*a, get_content_value(*b));
+		value = get_content_value(*b);
+		if (!get_is_maximum(value, *a))
+			temp_target = get_bigger(*a, value);
+		else 
+			temp_target = get_smallest(*a);
 		while (*a != temp_target)
 		{
 			if (get_rotation_way(temp_target, *a))
 				do_ra(a);
-			else
+			else if (get_rotation_way(temp_target, *a) == 0)
 				do_rra(a);
 		}
 		do_pa(a, b);
