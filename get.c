@@ -63,7 +63,7 @@ t_list	*get_smaller(t_list *list, int target)
 		current = get_content_value(list);
 		if (current <= target)
 		{
-			if (get_content_value(smaller_ptr) > target)
+			if (target < get_content_value(smaller_ptr))
 				smaller_ptr = list;
 			else if (current > get_content_value(smaller_ptr))
 				smaller_ptr = list;
@@ -75,21 +75,21 @@ t_list	*get_smaller(t_list *list, int target)
 
 t_list	*get_bigger(t_list *list, int target)
 {
-	t_list	*bigger_ptr;
+	t_list	*smaller_ptr;
 	int		current;
 
-	bigger_ptr = list;
+	smaller_ptr = list;
 	while (list)
 	{
 		current = get_content_value(list);
 		if (current >= target)
 		{
-			if (get_content_value(bigger_ptr) < target)
-				bigger_ptr = list;
-			else if (current < get_content_value(bigger_ptr))
-				bigger_ptr = list;
+			if (target > get_content_value(smaller_ptr))
+				smaller_ptr = list;
+			else if (current < get_content_value(smaller_ptr))
+				smaller_ptr = list;
 		}
 		list = list->next;
 	}
-	return (bigger_ptr);
+	return (smaller_ptr);
 }

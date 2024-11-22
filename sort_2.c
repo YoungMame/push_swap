@@ -34,6 +34,11 @@ static void	sort_stacks_3(t_list **a)
 		do_sa(a);
 		do_ra(a);
 	}
+	else if (val1 < val3 && val2 > val3)
+	{
+		do_ra(a);
+		do_sa(a);
+	}
 	else if (val1 < val2 && val2 > val3)
 		do_ra(a);
 	else if (val1 > val2 && val2 < val3)
@@ -52,12 +57,10 @@ void	sort_stacks_5(t_list **a, t_list **b)
 	while (*b)
 	{
 		value = get_content_value(*b);
-		ft_printf("Cas particulier = %i, ", value);
 		if (get_is_maximum(value, *a))
 			temp_target = get_smallest(*a);
 		else
 			temp_target = get_bigger(*a, value);
-		ft_printf("sa target est = %i\n", *temp_target);
 		while (*a != temp_target)
 		{
 			if (get_rotation_way(temp_target, *a))

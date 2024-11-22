@@ -50,34 +50,6 @@ int	handle_ope(char *ope, t_list **a_check, t_list **b_check)
 	return (1);
 }
 
-static void	show_list(t_list *a, t_list *b)
-{
-	int		index;
-
-	index = 0;
-	while (a || b)
-	{
-		if (a)
-		{
-			printf("%i, ", *((int *)a->content));
-			a = a->next;
-		}
-		else
-			printf(" null");
-		if (b)
-		{
-			printf("%i, ", *((int *)b->content));
-			b = b->next;
-		}
-		else
-			printf(" null");
-		printf("\n");
-		index++;
-	}
-	printf("a  |  b\n");
-	return ;
-}
-
 int	main(int argc, char **argv)
 {
 	t_list	*a_check;
@@ -101,9 +73,36 @@ int	main(int argc, char **argv)
 		is_running = handle_ope(line, &a_check, &b_check);
 		free(line);
 	}
-	show_list(a_check, b_check);
 	if (is_sorted(a_check) && ft_lstsize(b_check) == 0)
 		return (ft_printf("OK\n"), 1);
 	else
 		return (ft_printf("KO\n"), 1);
 }
+
+// static void	show_list(t_list *a, t_list *b)
+// {
+// 	int		index;
+
+// 	index = 0;
+// 	while (a || b)
+// 	{
+// 		if (a)
+// 		{
+// 			printf("%i, ", *((int *)a->content));
+// 			a = a->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		if (b)
+// 		{
+// 			printf("%i, ", *((int *)b->content));
+// 			b = b->next;
+// 		}
+// 		else
+// 			printf(" null");
+// 		printf("\n");
+// 		index++;
+// 	}
+// 	printf("a  |  b\n");
+// 	return ;
+// }
