@@ -41,6 +41,7 @@ void		do_rr(t_list **a, t_list **b);
 void		do_rra(t_list **a);
 void		do_rrb(t_list **b);
 void		do_rrr(t_list **a, t_list **b);
+int			is_arg_valid(char *str);
 int			get_content_value(t_list *list);
 void		free_stack_content(void *content);
 int			parse(char **args, int argc, t_list **a);

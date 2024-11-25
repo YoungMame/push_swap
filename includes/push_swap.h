@@ -41,6 +41,7 @@ void		do_rr(t_list **a, t_list **b);
 void		do_rra(t_list **a);
 void		do_rrb(t_list **b);
 void		do_rrr(t_list **a, t_list **b);
+int			is_arg_valid(char *str);
 int			get_content_value(t_list *list);
 int			get_rotation_way(t_list *target, t_list *list);
 t_list		*get_biggest(t_list *list);

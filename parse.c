@@ -34,7 +34,7 @@ static int	are_args_valid(char **args)
 		j = 0;
 		while (args[i] && args[i][j])
 		{
-			if (!ft_isdigit(args[i][j]) && args[i][j] != ' ')
+			if (!is_arg_valid(args[i]))
 				return (0);
 			i++;
 		}

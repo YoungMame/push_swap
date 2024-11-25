@@ -12,6 +12,29 @@
 
 #include "push_swap.h"
 
+int	is_arg_valid(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (ft_isdigit(str[i]))
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	while (str[i] == ' ')
+		i++;
+	if (str[i] == '\0')
+		return (1);
+	else
+		return (0);
+}
+
 int	is_sorted(t_list *list)
 {
 	while (list && list->next)
