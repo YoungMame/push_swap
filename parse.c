@@ -26,18 +26,13 @@ static int	is_existing(int n, t_list *list)
 static int	are_args_valid(char **args)
 {
 	int	i;
-	int	j;
 
-	i = 1;
+	i = 0;
 	while (args && args[i])
 	{
-		j = 0;
-		while (args[i] && args[i][j])
-		{
-			if (!is_arg_valid(args[i]))
-				return (0);
-			i++;
-		}
+		if (!is_arg_valid(args[i]))
+			return (0);
+		i++;
 	}
 	return (1);
 }
@@ -96,7 +91,7 @@ int	parse(char **args, int argc, t_list **a)
 
 	error = 0;
 	parsed_args = get_args(args, argc, &error);
-	if (error | !are_args_valid(args))
+	if (error || !are_args_valid(parsed_args))
 		return (parse_free(a, parsed_args, 1), 0);
 	i = -1;
 	content = NULL;
@@ -106,7 +101,7 @@ int	parse(char **args, int argc, t_list **a)
 		if (!content)
 			return (parse_free(a, parsed_args, 1), 0);
 		*content = ft_atol(parsed_args[i]);
-		if ((*a && is_existing(*content, *a))
+		if ((*a && is_existing((int)*content, *a))
 			|| !(INT_MIN < *content && *content < INT_MAX))
 			return (free(content), parse_free(a, parsed_args, 1), 0);
 		ft_lstadd_back(a, ft_lstnew((void *)content));
