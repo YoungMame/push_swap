@@ -102,7 +102,7 @@ int	parse(char **args, int argc, t_list **a)
 			return (parse_free(a, parsed_args, 1), 0);
 		*content = ft_atol(parsed_args[i]);
 		if ((*a && is_existing((int)*content, *a))
-			|| !(INT_MIN < *content && *content < INT_MAX))
+			|| !(INT_MIN <= *content && *content <= INT_MAX))
 			return (free(content), parse_free(a, parsed_args, 1), 0);
 		ft_lstadd_back(a, ft_lstnew((void *)content));
 	}
