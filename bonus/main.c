@@ -70,6 +70,33 @@ int	handle_ope(char *ope, t_list **a_check, t_list **b_check)
 		do_rr(a_check, b_check);
 	else if (ft_strncmp(ope, "rrr\n", ft_strlen(ope)) == 0)
 		do_rrr(a_check, b_check);
+	else
+		return (0);
+	return (1);
+}
+
+int	manage_entry(t_list **a_check, t_list **b_check)
+{
+	char	*line;
+	int		is_running;
+	int		is_parsing;
+
+	is_running = 1;
+	is_parsing = 1;
+	while (is_running)
+	{
+		line = ft_get_next_line(0);
+		if (!line)
+		{
+			free(line);
+			is_running = 0;
+		}
+		if (is_running && is_parsing && !handle_ope(line, a_check, b_check))
+			is_parsing = 0;
+		free(line);
+	}
+	if (!is_parsing)
+		return (ft_putstr_fd("Error\n", 2), 0);
 	return (1);
 }
 
@@ -78,26 +105,22 @@ int	main(int argc, char **argv)
 	t_list	*a_check;
 	t_list	*b_check;
 	int		error;
-	char	*line;
-	int		is_running;
 
 	a_check = NULL;
 	b_check = NULL;
 	error = (parse(argv, argc, &a_check) == 0);
 	if (error)
-		return (1);
-	line = NULL;
-	is_running = 1;
-	while (is_running)
-	{
-		line = ft_get_next_line(0);
-		if (!line)
-			break ;
-		is_running = handle_ope(line, &a_check, &b_check);
-		free(line);
-	}
+		return (ft_lstclear(&a_check, &free_stack_content),
+			ft_lstclear(&b_check, &free_stack_content), 1);
+	error = (manage_entry(&a_check, &b_check) == 0);
+	if (error)
+		return (ft_lstclear(&a_check, &free_stack_content),
+			ft_lstclear(&b_check, &free_stack_content), 1);
 	if (is_sorted(a_check) && ft_lstsize(b_check) == 0)
-		return (ft_printf("OK\n"), 1);
+		return (ft_lstclear(&a_check, &free_stack_content),
+			ft_lstclear(&b_check, &free_stack_content), ft_printf("OK\n"), 1);
 	else
-		return (ft_printf("KO\n"), 1);
+		return (ft_lstclear(&a_check, &free_stack_content),
+			ft_lstclear(&b_check, &free_stack_content), ft_printf("KO\n"), 1);
+	return (0);
 }

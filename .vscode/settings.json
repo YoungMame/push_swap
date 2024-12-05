@@ -1,5 +1,6 @@
 {
 	"files.associations": {
+		"*.c": "c",
 		"random": "c",
 		"span": "c",
 		"chrono": "c",
@@ -30,6 +31,7 @@
 		"__memory": "c",
 		"iterator": "c",
 		"limits": "c",
-		"vector": "c"
+		"vector": "c",
+		"__locale": "c"
 	}
 }

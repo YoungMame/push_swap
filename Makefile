@@ -8,7 +8,7 @@ SRC_PATH         = ./
 SRCS             = main.c swap.c rotate.c reverse_rotate.c push.c \
                     content.c get.c get_2.c cost.c sort.c sort_2.c parse.c
 BONUS_PATH       = bonus/
-BONUS_SRCS       = main.c parse.c content.c \
+BONUS_SRCS       = main.c parse.c content.c free.c \
                     swap.c push.c rotate.c reverse_rotate.c
 
 HEADER_PATH      = includes/
