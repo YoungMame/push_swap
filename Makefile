@@ -30,7 +30,9 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 	$(CC) $(FLAGS) -I $(HEADER_PATH) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
-bonus: all $(BONUS_OBJS) $(LIBFT)
+bonus: $(BONUS)
+
+$(BONUS): $(NAME) $(BONUS_OBJS) $(LIBFT)
 	$(CC) $(FLAGS) -I $(HEADER_PATH) $(BONUS_OBJS) -L$(LIBFT_DIR) -lft -o $(BONUS)
 
 $(LIBFT):

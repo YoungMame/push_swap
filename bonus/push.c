@@ -16,6 +16,8 @@ static void	push(t_list **a, t_list **b)
 {
 	t_list	*temp;
 
+	if (!b || !(*b))
+		return ;
 	temp = *b;
 	*b = (*b)->next;
 	temp->next = (*a);

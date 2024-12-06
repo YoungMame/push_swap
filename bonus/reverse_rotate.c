@@ -17,6 +17,8 @@ static void	reverse_rotate(t_list	**list)
 	t_list	*last;
 	t_list	*temp;
 
+	if (!*list || !(*list)->next)
+		return ;
 	last = *list;
 	while (last->next->next)
 		last = last->next;

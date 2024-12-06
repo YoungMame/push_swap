@@ -17,6 +17,8 @@ static void	rotate(t_list **list)
 	t_list	*temp;
 	t_list	*last;
 
+	if (!*list || !(*list)->next)
+		return ;
 	last = *list;
 	while (last->next)
 		last = last->next;
